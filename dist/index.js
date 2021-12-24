@@ -8459,7 +8459,7 @@ async function runMain() {
 		}
     const octokit = new github.getOctokit(githubToken);
 		const pullRequestNumber = context.payload.pull_request.number;
-    // await checkIfOldCommentExists(octokit, context, pullRequestNumber);
+    await checkIfOldCommentExists(octokit, context, pullRequestNumber);
     const ticketNumber = grabTicket(context.payload.pull_request.title)
     console.log("runMain -> ticketNumber", ticketNumber)
     if (!ticketNumber) {
