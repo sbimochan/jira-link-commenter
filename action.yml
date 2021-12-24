@@ -1,15 +1,12 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'JIRA Ticket commenter'
+description: 'Tags JIRA ticket link'
 inputs:
-  jira-project-url:  # id of input
-    description: 'Who to greet'
+  jira-project-url:
+    description: 'Link of your project URL'
     required: true
   GITHUB_TOKEN:
     description: 'Add token'
     required: true
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node16'
   main: 'index.js'
