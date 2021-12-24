@@ -4,10 +4,11 @@ This action auto comments in pull request with Jira link to it.
 
 ## Settings
 
+`jira-project-url`
+
 **Required** Add your jira link in ticket link format.
 `https://jira.atlassian.net/browse`
 
-**Required** Add your Github personal access token.
 
 ## Outputs
 
