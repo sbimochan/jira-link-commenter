@@ -8448,7 +8448,7 @@ const github = __nccwpck_require__(4510);
 /**
  * Searches with first Ticket like structure with colon and later removes it.
  *
- * @param {*} title
+ * @param {string} title
  */
 function grabTicket(title) {
   const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
@@ -8473,6 +8473,7 @@ async function run() {
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
     const ticketNumber = grabTicket(context.payload.pull_request.title)
+    console.log("run -> ticketNumber", ticketNumber)
     if (!ticketNumber) {
       return;
     }

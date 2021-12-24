@@ -29,6 +29,7 @@ async function run() {
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
     const ticketNumber = grabTicket(context.payload.pull_request.title)
+    console.log("run -> ticketNumber", ticketNumber)
     if (!ticketNumber) {
       return;
     }
