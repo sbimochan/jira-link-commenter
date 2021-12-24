@@ -14,11 +14,12 @@ async function run() {
 		const pull_request_number = context.payload.pull_request.number;
 
 		const octokit = new github.getOctokit(github_token);
-		const new_comment = octokit.issues.createComment({
+		const new_comment = octokit.rest.issues.createComment({
 			...context.repo,
 			issue_number: pull_request_number,
 			body: message,
 		});
+    console.log(new_comment)
 	} catch (error) {
 		core.setFailed(error.message);
 	}
