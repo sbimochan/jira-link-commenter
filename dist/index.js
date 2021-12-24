@@ -8460,6 +8460,14 @@ function grabTicket(title) {
   return ticketIdWithColon.slice(0,-1);
 }
 
+async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
+	const comments = await octokit.rest.issues.listComments({
+		...context.repo,
+		issue_number: pullRequestNumber,
+	});
+	console.log(comments);
+}
+
 async function run() {
 	try {
 		const jirProjectUrl = core.getInput('jira-project-url');
@@ -8472,6 +8480,7 @@ async function run() {
 			return;
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
+    await checkIfOldCommentExists(octokit, context, pullRequestNumber);
     const ticketNumber = grabTicket(context.payload.pull_request.title)
     if (!ticketNumber) {
       return;
