@@ -1,0 +1,24 @@
+{
+  "name": "jira-link-commenter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbimochan/jira-link-commenter.git"
+  },
+  "keywords": [],
+  "author": "Bimochan Shrestha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sbimochan/jira-link-commenter/issues"
+  },
+  "homepage": "https://github.com/sbimochan/jira-link-commenter#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0"
+  }
+}
