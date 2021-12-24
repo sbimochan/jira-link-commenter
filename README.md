@@ -19,9 +19,10 @@ Jira Link: https://jira.atlassian.net/browse/JPT-1571
 ## Example usage
 
 ```yaml
-uses: actions/jira-link-commenter@v2.3
+uses: actions/jira-link-commenter@v2.4
 with:
   jira-project-url: 'https://jira.atlassian.net/browse'
+  custom-comment: 'Thank you for your contribution! :confetti_ball:'
 ```
 
 ### Full example
@@ -38,11 +39,12 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v2.3
+        uses: sbimochan/jira-link-commenter@v2.4
 
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          custom-comment: 'Thank you for your contribution! :confetti_ball:'
 ```
 
 ### Recommendations:

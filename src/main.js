@@ -5,6 +5,7 @@ async function runMain() {
   try {
     const jirProjectUrl = core.getInput('jira-project-url');
     const githubToken = core.getInput('GITHUB_TOKEN');
+    const customComment = core.getInput('custom-comment');
 
     const context = github.context;
     if (context.payload.pull_request == null) {
@@ -30,9 +31,7 @@ async function runMain() {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
-      body: `Thank you for your contribution! :confetti_ball: \n Jira link: ${
-        jirProjectUrl + '/' + ticketNumber
-      }`
+      body: `${customComment} \n Jira link: ${jirProjectUrl + '/' + ticketNumber}`
     });
   } catch (error) {
     core.setFailed(error.message);

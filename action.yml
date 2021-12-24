@@ -7,6 +7,10 @@ inputs:
   GITHUB_TOKEN:
     description: 'Add token'
     required: true
+  custom-comment:
+    description: 'Add custom comment'
+    default: 'Thank you for your contribution! :confetti_ball:'
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
