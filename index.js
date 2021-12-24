@@ -1,7 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-
 async function runMain() {
 	try {
 		const jirProjectUrl = core.getInput('jira-project-url');
@@ -13,14 +12,17 @@ async function runMain() {
 
 			return;
 		}
-    const octokit = new github.getOctokit(githubToken);
+		const octokit = new github.getOctokit(githubToken);
 		const pullRequestNumber = context.payload.pull_request.number;
-    await checkIfOldCommentExists(octokit, context, pullRequestNumber);
-    const ticketNumber = grabTicket(context.payload.pull_request.title)
-    console.log("runMain -> ticketNumber", ticketNumber)
-    if (!ticketNumber) {
+		const isPrevComment = await checkIfOldCommentExists(octokit, context, pullRequestNumber);
+    if (isPrevComment) {
+      console.log("Jira link bot comment already exists.")
       return;
     }
+		const ticketNumber = grabTicket(context.payload.pull_request.title);
+		if (!ticketNumber) {
+			return;
+		}
 		await octokit.rest.issues.createComment({
 			...context.repo,
 			issue_number: pullRequestNumber,
@@ -32,11 +34,14 @@ async function runMain() {
 }
 
 async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
-	const comments = await octokit.rest.issues.listComments({
+	const commentsMeta = await octokit.rest.issues.listComments({
 		...context.repo,
 		issue_number: pullRequestNumber,
 	});
-	console.log(JSON.stringify(comments));
+	const isPrevComment = commentsMeta.data.some(
+		(el) => el.user.login === 'github-actions[bot]'
+	);
+	return isPrevComment;
 }
 
 /**
@@ -45,13 +50,13 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
  * @param {string} title
  */
 function grabTicket(title) {
-  const ticketRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
-    return null;
-  }
+	const ticketRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+	const ticketIdWithColon = title.match(ticketRegex)?.[0];
+	if (!ticketIdWithColon) {
+		return null;
+	}
 
-  return ticketIdWithColon.slice(0,-1);
+	return ticketIdWithColon.slice(0, -1);
 }
 
 runMain();
