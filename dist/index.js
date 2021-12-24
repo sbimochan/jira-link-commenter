@@ -8480,7 +8480,7 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
 		...context.repo,
 		issue_number: pullRequestNumber,
 	});
-	console.log(comments);
+	console.log(JSON.stringify(comments));
 }
 
 /**
