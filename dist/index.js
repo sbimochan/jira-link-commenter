@@ -8474,7 +8474,9 @@ async function runMain() {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
-      body: `Jira link: ${jirProjectUrl + '/' + ticketNumber}`
+      body: `Thank you for your contribution! :confetti_ball: \n Jira link: ${
+        jirProjectUrl + '/' + ticketNumber
+      }`
     });
   } catch (error) {
     core.setFailed(error.message);
