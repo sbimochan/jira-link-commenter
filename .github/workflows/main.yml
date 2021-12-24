@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v1.17
+        uses: sbimochan/jira-link-commenter@v1.18
         
         with:
           jira-project-url: https://jira.atlassian.net/browse

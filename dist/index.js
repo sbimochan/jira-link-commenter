@@ -8489,7 +8489,7 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
  * @param {string} title
  */
 function grabTicket(title) {
-  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
+  const ticketRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
   const ticketIdWithColon = title.match(ticketRegex)?.[0];
   if (!ticketIdWithColon) {
     return null;
