@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: sbimochan/jira-link-commenter@v1.1
+        uses: sbimochan/jira-link-commenter@v1.2
         with:
           jira-project-url: 'https://jira.atlassian.net/browse'
       # Use the output from the `hello` step
