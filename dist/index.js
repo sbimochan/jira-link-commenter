@@ -8445,18 +8445,49 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(5197);
 const github = __nccwpck_require__(4510);
 
-try {
-	// `jira-project-url` input defined in action metadata file
-	const nameToGreet = core.getInput('jira-project-url');
-	console.log(`Hello ${nameToGreet}!`);
-	const time = new Date().toTimeString();
-	core.setOutput('time', time);
-	// Get the JSON webhook payload for the event that triggered the workflow
-	const payload = JSON.stringify(github.context.payload, undefined, 2);
-	console.log(`The event payload: ${payload}`);
-} catch (error) {
-	core.setFailed(error.message);
+/**
+ * Searches with first Ticket like structure with colon and later removes it.
+ *
+ * @param {*} title
+ */
+function grabTicket(title) {
+  const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
+  const ticketIdWithColon = title.match(ticketRegex);
+  if (!ticketIdWithColon) {
+    return null;
+  }
+
+  return ticketIdWithColon.slice(0,-1);
 }
+
+async function run() {
+	try {
+		const jirProjectUrl = core.getInput('jira-project-url');
+		const githubToken = core.getInput('GITHUB_TOKEN');
+
+		const context = github.context;
+		if (context.payload.pull_request == null) {
+			core.setFailed('No pull request found.');
+
+			return;
+		}
+		const pullRequestNumber = context.payload.pull_request.number;
+    const ticketNumber = grabTicket(context.payload.pull_request.title)
+    if (!ticketNumber) {
+      return;
+    }
+		const octokit = new github.getOctokit(githubToken);
+		await octokit.rest.issues.createComment({
+			...context.repo,
+			issue_number: pullRequestNumber,
+			body: `Jira link: ${jirProjectUrl + '/' + ticketNumber}`,
+		});
+	} catch (error) {
+		core.setFailed(error.message);
+	}
+}
+
+run();
 
 })();
 
