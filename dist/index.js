@@ -8453,7 +8453,7 @@ const github = __nccwpck_require__(4510);
 function grabTicket(title) {
   const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
   const ticketIdWithColon = title.match(ticketRegex);
-  if (!ticketIdWithColor) {
+  if (!ticketIdWithColon) {
     return null;
   }
 
