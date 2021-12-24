@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 async function run() {
 	try {
-		const message = core.getInput('message');
+		const jirProjectUrl = core.getInput('jira-project-url');
 		const github_token = core.getInput('GITHUB_TOKEN');
 
 		const context = github.context;
@@ -17,7 +17,7 @@ async function run() {
 		const new_comment = octokit.rest.issues.createComment({
 			...context.repo,
 			issue_number: pull_request_number,
-			body: message,
+			body: `Jira: ${jirProjectUrl}/JPT-123`,
 		});
     console.log(new_comment)
 	} catch (error) {
