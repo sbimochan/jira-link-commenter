@@ -8445,22 +8445,8 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(5197);
 const github = __nccwpck_require__(4510);
 
-/**
- * Searches with first Ticket like structure with colon and later removes it.
- *
- * @param {string} title
- */
-function grabTicket(title) {
-  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
-    return null;
-  }
 
-  return ticketIdWithColon.slice(0,-1);
-}
-
-async function run() {
+async function runMain() {
 	try {
 		const jirProjectUrl = core.getInput('jira-project-url');
 		const githubToken = core.getInput('GITHUB_TOKEN');
@@ -8472,6 +8458,7 @@ async function run() {
 			return;
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
+    await checkIfOldCommentExists(octokit, context, pullRequestNumber);
     const ticketNumber = grabTicket(context.payload.pull_request.title)
     if (!ticketNumber) {
       return;
@@ -8487,7 +8474,30 @@ async function run() {
 	}
 }
 
-run();
+async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
+	const comments = await octokit.rest.issues.listComments({
+		...context.repo,
+		issue_number: pullRequestNumber,
+	});
+	console.log(comments);
+}
+
+/**
+ * Searches with first Ticket like structure with colon and later removes it.
+ *
+ * @param {string} title
+ */
+function grabTicket(title) {
+  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
+  const ticketIdWithColon = title.match(ticketRegex)?.[0];
+  if (!ticketIdWithColon) {
+    return null;
+  }
+
+  return ticketIdWithColon.slice(0,-1);
+}
+
+runMain();
 
 })();
 

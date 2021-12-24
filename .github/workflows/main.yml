@@ -1,6 +1,4 @@
-on: 
-  pull_request:
-    types: [opened]
+on: pull_request
 
 jobs:
   example_comment_pr:
@@ -11,7 +9,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v1.13
+        uses: sbimochan/jira-link-commenter@v1.15
         
         with:
           jira-project-url: https://jira.atlassian.net/browse
