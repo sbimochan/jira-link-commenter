@@ -1,16 +1,16 @@
-on: [push]
+on: pull_request
 
 jobs:
-  hello_world_job:
+  example_comment_pr:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: An example job to comment a PR
     steps:
-      - name: Hello world action step
-        id: hello
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Comment PR
         uses: sbimochan/jira-link-commenter@v1.3
+        
         with:
+          message: 'Example of message !'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          jira-project-url: 'https://jira.atlassian.net/browse'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
