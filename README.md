@@ -16,6 +16,28 @@ Creates a comment in your PR
 
 ## Example usage
 
-uses: actions/jira-link-commenter@v1.0
+```yaml
+uses: actions/jira-link-commenter@v2.0
 with:
   jira-project-url: 'https://jira.atlassian.net/browse'
+```
+
+### Full example
+```yaml
+on: pull_request
+
+jobs:
+  example_comment_pr:
+    runs-on: ubuntu-latest
+    name: Auto jira link commenter
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Comment PR
+        uses: sbimochan/jira-link-commenter@v2.0
+        
+        with:
+          jira-project-url: https://jira.atlassian.net/browse
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
