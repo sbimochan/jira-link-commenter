@@ -1,30 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-/**
- * Searches with first Ticket like structure with colon and later removes it.
- *
- * @param {string} title
- */
-function grabTicket(title) {
-  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
-    return null;
-  }
 
-  return ticketIdWithColon.slice(0,-1);
-}
-
-async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
-	const comments = await octokit.rest.issues.listComments({
-		...context.repo,
-		issue_number: pullRequestNumber,
-	});
-	console.log(comments);
-}
-
-async function run() {
+async function runMain() {
 	try {
 		const jirProjectUrl = core.getInput('jira-project-url');
 		const githubToken = core.getInput('GITHUB_TOKEN');
@@ -52,4 +30,27 @@ async function run() {
 	}
 }
 
-run();
+async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
+	const comments = await octokit.rest.issues.listComments({
+		...context.repo,
+		issue_number: pullRequestNumber,
+	});
+	console.log(comments);
+}
+
+/**
+ * Searches with first Ticket like structure with colon and later removes it.
+ *
+ * @param {string} title
+ */
+function grabTicket(title) {
+  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
+  const ticketIdWithColon = title.match(ticketRegex)?.[0];
+  if (!ticketIdWithColon) {
+    return null;
+  }
+
+  return ticketIdWithColon.slice(0,-1);
+}
+
+runMain();
