@@ -7,12 +7,13 @@ This action auto comments in pull request with Jira link to it.
 `jira-project-url`
 
 **Required** Add your jira link in ticket link format.
+E.g:
 `https://jira.atlassian.net/browse`
-
 
 ## Outputs
 
-Creates a comment in your PR
+Creates a comment in your PR:
+
 Jira Link: https://jira.atlassian.net/browse/JPT-1571
 
 ## Example usage
@@ -24,6 +25,7 @@ with:
 ```
 
 ### Full example
+
 ```yaml
 on: pull_request
 
@@ -37,7 +39,7 @@ jobs:
 
       - name: Comment PR
         uses: sbimochan/jira-link-commenter@v2.0
-        
+
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,4 +51,4 @@ jobs:
 
 This makes your commits and PR summary consistent.
 
-[Check repo](https://github.com/sbimochan/smart-commit)
+<a href="https://github.com/sbimochan/smart-commit" target="_blank">Check repo.</a>
