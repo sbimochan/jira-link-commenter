@@ -19,7 +19,7 @@ Jira Link: https://jira.atlassian.net/browse/JPT-1571
 ## Example usage
 
 ```yaml
-uses: actions/jira-link-commenter@v2.2
+uses: actions/jira-link-commenter@v2.3
 with:
   jira-project-url: 'https://jira.atlassian.net/browse'
 ```
