@@ -4,7 +4,9 @@ inputs:
   jira-project-url:  # id of input
     description: 'Who to greet'
     required: true
-    default: 'World'
+  GITHUB_TOKEN:
+    description: 'Add token'
+    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'
