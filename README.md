@@ -18,6 +18,8 @@ Jira Link: https://jira.atlassian.net/browse/JPT-1571
 
 ## Example usage
 
+`custom-comment` is (optional)
+
 ```yaml
 uses: actions/jira-link-commenter@v2.4
 with:
