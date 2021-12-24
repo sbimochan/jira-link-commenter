@@ -1,6 +1,6 @@
 # Jira link commenter
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action auto comments in pull request with Jira link to it.
 
 ## Settings
 
@@ -12,7 +12,7 @@ This action prints "Hello World" or "Hello" + the name of a person to greet to t
 ## Outputs
 
 Creates a comment in your PR
-'https://jira.atlassian.net/browse/JPT-1571'
+Jira Link: https://jira.atlassian.net/browse/JPT-1571
 
 ## Example usage
 
