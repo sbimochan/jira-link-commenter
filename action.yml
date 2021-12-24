@@ -1,5 +1,5 @@
 name: 'JIRA Ticket commenter'
-description: 'Tags JIRA ticket link'
+description: 'Comments JIRA ticket link in pull request'
 inputs:
   jira-project-url:
     description: 'Link of your project URL'
