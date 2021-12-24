@@ -7,8 +7,9 @@ jobs:
     steps:
       - name: Hello world action step
         id: hello
-        uses: sbimochan/jira-link-commenter@v1.2
+        uses: sbimochan/jira-link-commenter@v1.3
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           jira-project-url: 'https://jira.atlassian.net/browse'
       # Use the output from the `hello` step
       - name: Get the output time
