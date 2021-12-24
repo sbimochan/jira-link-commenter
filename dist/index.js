@@ -8445,10 +8445,25 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(5197);
 const github = __nccwpck_require__(4510);
 
+/**
+ * Searches with first Ticket like structure with colon and later removes it.
+ *
+ * @param {*} title
+ */
+function grabTicket(title) {
+  const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
+  const ticketIdWithColon = title.match(ticketRegex);
+  if (!ticketIdWithColor) {
+    return null;
+  }
+
+  return ticketIdWithColon.slice(0,-1);
+}
+
 async function run() {
 	try {
 		const jirProjectUrl = core.getInput('jira-project-url');
-		const githubToekn = core.getInput('GITHUB_TOKEN');
+		const githubToken = core.getInput('GITHUB_TOKEN');
 
 		const context = github.context;
 		if (context.payload.pull_request == null) {
@@ -8457,12 +8472,15 @@ async function run() {
 			return;
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
-    console.log(JSON.stringify(context.payload.pull_request));
-		const octokit = new github.getOctokit(githubToekn);
+    const ticketNumber = grabTicket(context.payload.pull_request.title)
+    if (!ticketNumber) {
+      return;
+    }
+		const octokit = new github.getOctokit(githubToken);
 		await octokit.rest.issues.createComment({
 			...context.repo,
 			issue_number: pullRequestNumber,
-			body: `Jira: ${jirProjectUrl}/JPT-123`,
+			body: `Jira link: ${jirProjectUrl + '/' + ticketNumber}`,
 		});
 	} catch (error) {
 		core.setFailed(error.message);
