@@ -41,3 +41,11 @@ jobs:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+### Recommendations:
+
+> Smart Commit
+
+This makes your commits and PR summary consistent.
+
+[Check repo](https://github.com/sbimochan/smart-commit)
