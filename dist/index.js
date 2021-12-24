@@ -8451,8 +8451,8 @@ const github = __nccwpck_require__(4510);
  * @param {string} title
  */
 function grabTicket(title) {
-  const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
-  const ticketIdWithColon = title.match(ticketRegex);
+  const ticketRegex = /^[A-Z,a-z]{2,}-\d{2,}:/g;
+  const ticketIdWithColon = title.match(ticketRegex)?.[0];
   if (!ticketIdWithColon) {
     return null;
   }
@@ -8473,7 +8473,6 @@ async function run() {
 		}
 		const pullRequestNumber = context.payload.pull_request.number;
     const ticketNumber = grabTicket(context.payload.pull_request.title)
-    console.log("run -> ticketNumber", ticketNumber)
     if (!ticketNumber) {
       return;
     }
