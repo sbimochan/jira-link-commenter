@@ -8457,13 +8457,13 @@ async function runMain() {
 
 			return;
 		}
+    const octokit = new github.getOctokit(githubToken);
 		const pullRequestNumber = context.payload.pull_request.number;
     await checkIfOldCommentExists(octokit, context, pullRequestNumber);
     const ticketNumber = grabTicket(context.payload.pull_request.title)
     if (!ticketNumber) {
       return;
     }
-		const octokit = new github.getOctokit(githubToken);
 		await octokit.rest.issues.createComment({
 			...context.repo,
 			issue_number: pullRequestNumber,
