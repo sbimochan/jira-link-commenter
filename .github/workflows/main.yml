@@ -12,5 +12,5 @@ jobs:
         uses: sbimochan/jira-link-commenter@v1.3
         
         with:
-          message: 'Example of message !'
+          jira-project-url: 'https://jira.atlassian.net/browse'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
