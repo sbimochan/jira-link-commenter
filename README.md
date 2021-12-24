@@ -7,12 +7,12 @@ This action prints "Hello World" or "Hello" + the name of a person to greet to t
 **Required** Add your jira link in ticket link format.
 `https://jira.atlassian.net/browse`
 
+**Required** Add your Github personal access token.
+
 ## Outputs
 
-It appends ticket number to the link
+Creates a comment in your PR
 'https://jira.atlassian.net/browse/JPT-1571'
-
-The time we greeted you.
 
 ## Example usage
 

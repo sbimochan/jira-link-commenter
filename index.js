@@ -8,7 +8,7 @@ const github = require('@actions/github');
  */
 function grabTicket(title) {
   const ticketRegex = /[A-Z,a-z]{2,}-\d{2,}:/s;
-  const ticketIdWithColon = title.match(ticketRegex);
+  const ticketIdWithColon = title.match(ticketRegex)[0];
   if (!ticketIdWithColon) {
     return null;
   }
