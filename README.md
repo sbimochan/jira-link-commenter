@@ -49,6 +49,11 @@ jobs:
           custom-comment: 'Thank you for your contribution! :confetti_ball:'
 ```
 
+Demo:
+
+<img width="481" alt="Screen Shot 2021-12-24 at 7 21 10 PM" src="https://user-images.githubusercontent.com/11685953/147376660-50957431-f9a8-4317-b10a-9fcce82e7b42.png">
+
+
 ### Recommendations:
 
 > Smart Commit
