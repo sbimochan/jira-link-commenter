@@ -1,6 +1,7 @@
 # Jira link commenter
 
 This action auto comments in pull request with Jira link to it.
+>This tool can be used with other project tracking tools like ClickUp as well. Let's explore together!
 
 ## Settings
 
