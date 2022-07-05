@@ -8445,11 +8445,15 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 
+const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+
 async function runMain() {
   try {
     const jirProjectUrl = core.getInput('jira-project-url');
     const githubToken = core.getInput('GITHUB_TOKEN');
     const customComment = core.getInput('custom-comment');
+    const ticketRegexRaw = core.getInput('ticket-regex-title')
+    const ticketRegex = ticketRegexRaw ? new RegExp(ticketRegexRaw, 'g') : DEFAULT_TICKET_REGEX;
 
     const context = github.context;
     if (context.payload.pull_request == null) {
@@ -8468,7 +8472,7 @@ async function runMain() {
       console.log('Jira link bot comment already exists.');
       return;
     }
-    const ticketNumber = grabTicket(context.payload.pull_request.title);
+    const ticketNumber = grabTicket(context.payload.pull_request.title, ticketRegex);
     if (!ticketNumber) {
       return;
     }
@@ -8498,8 +8502,7 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
  *
  * @param {string} title
  */
-function grabTicket(title) {
-  const ticketRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+function grabTicket(title, ticketRegex) {
   const ticketIdWithColon = title.match(ticketRegex)?.[0];
   if (!ticketIdWithColon) {
     return null;
