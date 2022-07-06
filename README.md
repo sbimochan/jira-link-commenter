@@ -5,7 +5,8 @@ This action auto comments in pull request with Jira link to it.
 
 ## Settings
 
-`jira-project-url`
+ - `jira-project-url`
+ - `ticket-regex-title`
 
 **Required** Add your jira link in ticket link format.
 E.g:
