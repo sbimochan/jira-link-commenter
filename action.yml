@@ -11,6 +11,9 @@ inputs:
     description: 'Add custom comment'
     default: 'Thank you for your contribution! :confetti_ball:'
     required: false
+  ticket-regex-title:
+    description: 'Use custom regex to pick ticket name'
+    required: false
 runs:
   using: 'node16'
   main: 'dist/index.js'
