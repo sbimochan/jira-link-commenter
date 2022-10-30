@@ -1,16 +1,24 @@
 # Jira link commenter
 
 This action auto comments in pull request with Jira link to it.
->This tool can be used with other project tracking tools like ClickUp as well. Let's explore together!
+
+> This tool can be used with other project tracking tools like ClickUp as well. Let's explore together!
 
 ## Settings
 
- - `jira-project-url`
- - `ticket-regex-title`
+- `jira-project-url`
 
 **Required** Add your jira link in ticket link format.
 E.g:
 `https://jira.atlassian.net/browse`
+
+- `ticket-regex-title`
+
+**Optional** You can add custom regex if your PR description seems to be different but I encourage to have same standard world wide.
+
+#### PR summary example:
+
+`XYZ-1234: This is an amazing feature`
 
 ## Outputs
 
@@ -25,8 +33,8 @@ Jira Link: https://jira.atlassian.net/browse/JPT-1571
 ```yaml
 uses: actions/jira-link-commenter@v2.4
 with:
-  jira-project-url: 'https://jira.atlassian.net/browse'
-  custom-comment: 'Thank you for your contribution! :confetti_ball:'
+  jira-project-url: "https://jira.atlassian.net/browse"
+  custom-comment: "Thank you for your contribution! :confetti_ball:"
 ```
 
 ### Full example
@@ -48,13 +56,12 @@ jobs:
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          custom-comment: 'Thank you for your contribution! :confetti_ball:'
+          custom-comment: "Thank you for your contribution! :confetti_ball:"
 ```
 
 Demo:
 
 <img width="481" alt="Screen Shot 2021-12-24 at 7 21 10 PM" src="https://user-images.githubusercontent.com/11685953/147376660-50957431-f9a8-4317-b10a-9fcce82e7b42.png">
-
 
 ### Recommendations:
 
