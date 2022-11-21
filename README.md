@@ -65,6 +65,12 @@ Demo:
 
 ### Recommendations:
 
+> Ticket link appender
+
+This is more generic and has more flexibility on prefixes and tools you use. If you want to link the ticket link in the description itself, you can check this repository.
+
+[Check repo.](https://github.com/sbimochan/ticket-link-appender)
+
 > Smart Commit
 
 This makes your commits and PR summary consistent.
