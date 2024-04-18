@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}(?=:)/g;
 
 async function runMain() {
   try {
@@ -59,12 +59,12 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
  * @param {string} title
  */
 function grabTicket(title, ticketRegex) {
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
+  const ticketId = title.match(ticketRegex)?.[0];
+  if (!ticketId) {
     return null;
   }
 
-  return ticketIdWithColon.slice(0, -1);
+  return ticketId;
 }
 
 runMain();
