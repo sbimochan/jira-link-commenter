@@ -6,12 +6,11 @@ jobs:
     name: Auto jira link commenter
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v2.4
-        
+        uses: sbimochan/jira-link-commenter@v3.0
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          custom-comment: 'Thank you for your contribution!!! :confetti_ball:'
+          custom-comment: "Thank you for your contribution!!! :confetti_ball:"
