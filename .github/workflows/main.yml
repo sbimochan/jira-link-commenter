@@ -12,12 +12,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
         run: npm test
+
   example_comment_pr:
     runs-on: ubuntu-latest
     name: Auto jira link commenter
