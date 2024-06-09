@@ -21,7 +21,7 @@ jobs:
 
       - name: Comment PR
         if: success()
-        uses: sbimochan/jira-link-commenter@v3.0
+        uses: sbimochan/jira-link-commenter@v2.4
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
