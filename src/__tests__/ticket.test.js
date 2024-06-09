@@ -1,5 +1,5 @@
-const grabTicket = require('../main').grabTicket;
-const ticketRegex = require('../main').DEFAULT_TICKET_REGEX
+const grabTicket = require('../ticket').grabTicket;
+const ticketRegex = require('../ticket').DEFAULT_TICKET_REGEX
 
 describe('grabTicket', () => {
   it('should return ticket id without colon', () => {
@@ -21,6 +21,13 @@ describe('grabTicket', () => {
     const result = grabTicket(title, ticketRegex);
 
     expect(result).toBe('ABCDEFGH-12345678');
+  });
+
+  it('should return not return ticket without colon', () => {
+    const title = 'ABCDEFGH-12345678 New Feature';
+    const result = grabTicket(title, ticketRegex);
+
+    expect(result).toBeNull();
   });
 
   it('should return null if no ticket id is found', () => {
