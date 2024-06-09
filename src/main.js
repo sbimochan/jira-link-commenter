@@ -67,4 +67,6 @@ function grabTicket(title, ticketRegex) {
   return ticketIdWithColon.slice(0, -1);
 }
 
+module.exports = { grabTicket, DEFAULT_TICKET_REGEX }
+
 runMain();
