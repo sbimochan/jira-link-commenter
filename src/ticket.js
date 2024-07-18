@@ -14,4 +14,4 @@ function grabTicket(title, ticketRegex) {
   return ticketId;
 }
 
-module.exports = { grabTicket, DEFAULT_TICKET_REGEX }
+module.exports = { grabTicket, DEFAULT_TICKET_REGEX };
