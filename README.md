@@ -1,6 +1,6 @@
-# Jira link commenter
+# Auto link commenter
 
-This action auto comments in pull request with Jira link to it.
+This action auto comments in pull request with Auto link to it.
 
 > This tool can be used with other project tracking tools like ClickUp as well. Let's explore together!
 
@@ -24,7 +24,7 @@ E.g:
 
 Creates a comment in your PR:
 
-Jira Link: https://auto.atlassian.net/browse/JPT-1571
+Auto Link: https://auto.atlassian.net/browse/JPT-1571
 
 ## Example usage
 

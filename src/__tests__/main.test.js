@@ -66,7 +66,7 @@ describe('GitHub Action Tests', () => {
       owner: 'owner',
       repo: 'repo',
       issue_number: 123,
-      body: 'Thank you for your contribution!!! :confetti_ball: \n Jira link: https://jira.example.com/TEST-1234',
+      body: 'Thank you for your contribution!!! :confetti_ball: \n Auto link: https://jira.example.com/TEST-1234',
     });
   });
 
@@ -78,7 +78,7 @@ describe('GitHub Action Tests', () => {
     await runMain();
 
     expect(octokit.rest.issues.createComment).not.toHaveBeenCalled();
-    expect(console.log).toHaveBeenCalledWith('Jira link bot comment already exists.');
+    expect(console.log).toHaveBeenCalledWith('Auto link bot comment already exists.');
   });
 
   test('should handle no ticket number found', async () => {

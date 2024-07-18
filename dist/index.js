@@ -9646,7 +9646,7 @@ async function runMain() {
       pullRequestNumber
     );
     if (isPrevComment) {
-      console.log("Jira link bot comment already exists.");
+      console.log("Auto link bot comment already exists.");
       return;
     }
     const ticketNumber = grabTicket(
@@ -9659,7 +9659,7 @@ async function runMain() {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
-      body: `${customComment} \n Jira link: ${
+      body: `${customComment} \n Auto link: ${
         jirProjectUrl + "/" + ticketNumber
       }`,
     });

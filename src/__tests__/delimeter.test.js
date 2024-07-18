@@ -66,7 +66,7 @@ describe("PR title with no semicolon Ticket ID", () => {
       owner: "owner",
       repo: "repo",
       issue_number: 123,
-      body: "Thank you for your contribution!!! :confetti_ball: \n Jira link: https://jira.example.com/TEST-123",
+      body: "Thank you for your contribution!!! :confetti_ball: \n Auto link: https://jira.example.com/TEST-123",
     });
   });
 });
