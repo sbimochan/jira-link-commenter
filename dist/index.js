@@ -9624,7 +9624,7 @@ const { grabTicket, DEFAULT_TICKET_REGEX } = __nccwpck_require__(5574);
 
 async function runMain() {
   try {
-    const jirProjectUrl = core.getInput("jira-project-url");
+    const jirProjectUrl = core.getInput("auto-project-url");
     const githubToken = core.getInput("GITHUB_TOKEN");
     const customComment = core.getInput("custom-comment");
     const ticketRegexRaw = core.getInput("ticket-regex-title");
