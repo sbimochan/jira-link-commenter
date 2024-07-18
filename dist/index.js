@@ -9420,23 +9420,23 @@ function wrappy (fn, cb) {
 /***/ 5574:
 /***/ ((module) => {
 
-const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}(?=:)/g;
 
 /**
- * Searches with first Ticket like structure with colon and later removes it.
+ * Searches with first Ticket id like ABC-123 only. No colon.
  *
  * @param {string} title
  */
 function grabTicket(title, ticketRegex) {
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
+  const ticketId = title.match(ticketRegex)?.[0];
+  if (!ticketId) {
     return null;
   }
 
-  return ticketIdWithColon.slice(0, -1);
+  return ticketId;
 }
 
-module.exports = { grabTicket, DEFAULT_TICKET_REGEX }
+module.exports = { grabTicket, DEFAULT_TICKET_REGEX };
 
 
 /***/ }),
@@ -9624,15 +9624,17 @@ const { grabTicket, DEFAULT_TICKET_REGEX } = __nccwpck_require__(5574);
 
 async function runMain() {
   try {
-    const jirProjectUrl = core.getInput('jira-project-url');
-    const githubToken = core.getInput('GITHUB_TOKEN');
-    const customComment = core.getInput('custom-comment');
-    const ticketRegexRaw = core.getInput('ticket-regex-title')
-    const ticketRegex = ticketRegexRaw ? new RegExp(ticketRegexRaw, 'g') : DEFAULT_TICKET_REGEX;
+    const jirProjectUrl = core.getInput("jira-project-url");
+    const githubToken = core.getInput("GITHUB_TOKEN");
+    const customComment = core.getInput("custom-comment");
+    const ticketRegexRaw = core.getInput("ticket-regex-title");
+    const ticketRegex = ticketRegexRaw
+      ? new RegExp(ticketRegexRaw, "g")
+      : DEFAULT_TICKET_REGEX;
 
     const context = github.context;
     if (context.payload.pull_request == null) {
-      core.setFailed('No pull request found.');
+      core.setFailed("No pull request found.");
 
       return;
     }
@@ -9644,17 +9646,22 @@ async function runMain() {
       pullRequestNumber
     );
     if (isPrevComment) {
-      console.log('Jira link bot comment already exists.');
+      console.log("Jira link bot comment already exists.");
       return;
     }
-    const ticketNumber = grabTicket(context.payload.pull_request.title, ticketRegex);
+    const ticketNumber = grabTicket(
+      context.payload.pull_request.title,
+      ticketRegex
+    );
     if (!ticketNumber) {
       return;
     }
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
-      body: `${customComment} \n Jira link: ${jirProjectUrl + '/' + ticketNumber}`
+      body: `${customComment} \n Jira link: ${
+        jirProjectUrl + "/" + ticketNumber
+      }`,
     });
   } catch (error) {
     core.setFailed(error.message);
@@ -9664,10 +9671,10 @@ async function runMain() {
 async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
   const commentsMeta = await octokit.rest.issues.listComments({
     ...context.repo,
-    issue_number: pullRequestNumber
+    issue_number: pullRequestNumber,
   });
   const isPrevComment = commentsMeta.data.some(
-    (el) => el.user.login === 'github-actions[bot]'
+    (el) => el.user.login === "github-actions[bot]"
   );
   return isPrevComment;
 }
