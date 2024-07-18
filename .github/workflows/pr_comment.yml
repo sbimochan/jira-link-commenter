@@ -3,15 +3,15 @@ on: pull_request
 jobs:
   example_comment_pr:
     runs-on: ubuntu-latest
-    name: Auto jira link commenter
+    name: Auto auto link commenter
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v3.2
+        uses: sbimochan/auto-link-commenter@v3.2
         with:
-          jira-project-url: https://jira.atlassian.net/browse
+          auto-project-url: https://auto.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           custom-comment: "Thank you for your contribution!!! :confetti_ball:"
           ticket-regex-title: ^[A-Z,a-z]{2,}-\\d{1,}
