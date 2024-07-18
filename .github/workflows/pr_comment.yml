@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Comment PR
-        uses: sbimochan/jira-link-commenter@v3.0
+        uses: sbimochan/jira-link-commenter@v3.2
         with:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
