@@ -5,7 +5,6 @@ const { grabTicket, DEFAULT_TICKET_REGEX } = require('../ticket');
 
 jest.mock('@actions/core');
 jest.mock('@actions/github');
-jest.mock('../ticket');
 
 describe('GitHub Action Tests', () => {
   let context;
@@ -51,7 +50,6 @@ describe('GitHub Action Tests', () => {
       return inputs[name];
     });
 
-    grabTicket.mockReturnValue('TEST-1234');
     logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
 
   });
@@ -84,7 +82,7 @@ describe('GitHub Action Tests', () => {
   });
 
   test('should handle no ticket number found', async () => {
-    grabTicket.mockReturnValue(null);
+    context.payload.pull_request.title = 'No ticket in title';
 
     await runMain();
 
