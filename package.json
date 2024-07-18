@@ -5,6 +5,7 @@
   "main": "src/main.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "build": "ncc build src/main.js -o dist"
   },
   "repository": {
