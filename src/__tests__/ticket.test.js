@@ -45,13 +45,26 @@ describe("grabTicket", () => {
   });
 });
 
-const customRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
-
 describe("grabTicket by custom regex", () => {
   it("should return ticket id with colon", () => {
     const title = "XYZ-3412: This title is with colon";
-    const result = grabTicket(title, customRegex);
+    const result = grabTicket(title, /^[A-Z,a-z]{2,}-\d{1,}:/g);
     const expectedResult = "XYZ-3412:";
+
+    expect(result).toBe(expectedResult);
+  });
+  it("should return ticket id without colon", () => {
+    const title = "XYZ-3412 This title is with colon";
+    const result = grabTicket(title, /^[A-Z,a-z]{2,}-\d{1,}/g);
+    const expectedResult = "XYZ-3412";
+
+    expect(result).toBe(expectedResult);
+  });
+
+  it("should only take the fist hyphened word", () => {
+    const title = "XYZ-3412 ABC-3124 This title is with colon";
+    const result = grabTicket(title, /^[A-Z,a-z]{2,}-\d{1,}/g);
+    const expectedResult = "XYZ-3412";
 
     expect(result).toBe(expectedResult);
   });
