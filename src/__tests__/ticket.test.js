@@ -1,6 +1,7 @@
 const grabTicket = require('../ticket').grabTicket;
 const ticketRegex = require('../ticket').DEFAULT_TICKET_REGEX
 
+
 describe('grabTicket', () => {
   it('should return ticket id without colon', () => {
     const title = 'ABC-123: New Feature';
@@ -45,3 +46,16 @@ describe('grabTicket', () => {
   });
 
 });
+
+const customRegex = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+
+describe('grabTicket by custom regex', () => {
+  it('should return ticket id with colon', () => {
+    const title = 'XYZ-3412: This title is with colon';
+    const result = grabTicket(title, customRegex);
+    const expectedResult = 'XYZ-3412:';
+
+    expect(result).toBe(expectedResult);
+    
+  });
+})

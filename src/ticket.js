@@ -1,17 +1,17 @@
-const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}:/g;
+const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}(?=:)/g;
 
 /**
- * Searches with first Ticket like structure with colon and later removes it.
+ * Searches with first Ticket id like ABC-123 only. No colon.
  *
  * @param {string} title
  */
 function grabTicket(title, ticketRegex) {
-  const ticketIdWithColon = title.match(ticketRegex)?.[0];
-  if (!ticketIdWithColon) {
+  const ticketId = title.match(ticketRegex)?.[0];
+  if (!ticketId) {
     return null;
   }
 
-  return ticketIdWithColon.slice(0, -1);
+  return ticketId;
 }
 
 module.exports = { grabTicket, DEFAULT_TICKET_REGEX }
