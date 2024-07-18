@@ -31,7 +31,7 @@ Auto Link: https://auto.atlassian.net/browse/JPT-1571
 `custom-comment` is (optional)
 
 ```yaml
-uses: actions/auto-link-commenter@v2.4
+uses: actions/jira-link-commenter@v2.4
 with:
   auto-project-url: "https://auto.atlassian.net/browse"
   custom-comment: "Thank you for your contribution! :confetti_ball:"
@@ -45,13 +45,13 @@ on: pull_request
 jobs:
   example_comment_pr:
     runs-on: ubuntu-latest
-    name: Auto auto link commenter
+    name: Auto link commenter
     steps:
       - name: Checkout
         uses: actions/checkout@v1
 
       - name: Comment PR
-        uses: sbimochan/auto-link-commenter@v2.4
+        uses: sbimochan/jira-link-commenter@v2.4
 
         with:
           auto-project-url: https://auto.atlassian.net/browse
