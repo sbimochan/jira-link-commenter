@@ -60,3 +60,4 @@ async function checkIfOldCommentExists(octokit, context, pullRequestNumber) {
 }
 
 runMain();
+module.exports = { runMain };
