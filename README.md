@@ -1,16 +1,16 @@
-# Jira link commenter
+# Auto link commenter
 
-This action auto comments in pull request with Jira link to it.
+This action auto comments in pull request with Auto link to it.
 
 > This tool can be used with other project tracking tools like ClickUp as well. Let's explore together!
 
 ## Settings
 
-- `jira-project-url`
+- `auto-project-url`
 
-**Required** Add your jira link in ticket link format.
+**Required** Add your auto link in ticket link format.
 E.g:
-`https://jira.atlassian.net/browse`
+`https://auto.atlassian.net/browse`
 
 - `ticket-regex-title`
 
@@ -24,7 +24,7 @@ E.g:
 
 Creates a comment in your PR:
 
-Jira Link: https://jira.atlassian.net/browse/JPT-1571
+Auto Link: https://auto.atlassian.net/browse/JPT-1571
 
 ## Example usage
 
@@ -33,7 +33,7 @@ Jira Link: https://jira.atlassian.net/browse/JPT-1571
 ```yaml
 uses: actions/jira-link-commenter@v2.4
 with:
-  jira-project-url: "https://jira.atlassian.net/browse"
+  auto-project-url: "https://auto.atlassian.net/browse"
   custom-comment: "Thank you for your contribution! :confetti_ball:"
 ```
 
@@ -45,7 +45,7 @@ on: pull_request
 jobs:
   example_comment_pr:
     runs-on: ubuntu-latest
-    name: Auto jira link commenter
+    name: Auto link commenter
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -54,7 +54,7 @@ jobs:
         uses: sbimochan/jira-link-commenter@v2.4
 
         with:
-          jira-project-url: https://jira.atlassian.net/browse
+          auto-project-url: https://auto.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           custom-comment: "Thank you for your contribution! :confetti_ball:"
 ```

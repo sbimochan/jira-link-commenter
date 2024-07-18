@@ -1,7 +1,7 @@
 {
   "name": "jira-link-commenter",
   "version": "3.2",
-  "description": "This action auto comments in pull request with Jira link to it.",
+  "description": "This action auto comments in pull request with Auto link to it.",
   "main": "src/main.js",
   "scripts": {
     "test": "jest",

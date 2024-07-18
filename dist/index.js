@@ -9624,7 +9624,7 @@ const { grabTicket, DEFAULT_TICKET_REGEX } = __nccwpck_require__(5574);
 
 async function runMain() {
   try {
-    const jirProjectUrl = core.getInput("jira-project-url");
+    const jirProjectUrl = core.getInput("auto-project-url");
     const githubToken = core.getInput("GITHUB_TOKEN");
     const customComment = core.getInput("custom-comment");
     const ticketRegexRaw = core.getInput("ticket-regex-title");
@@ -9646,7 +9646,7 @@ async function runMain() {
       pullRequestNumber
     );
     if (isPrevComment) {
-      console.log("Jira link bot comment already exists.");
+      console.log("Auto link bot comment already exists.");
       return;
     }
     const ticketNumber = grabTicket(
@@ -9659,7 +9659,7 @@ async function runMain() {
     await octokit.rest.issues.createComment({
       ...context.repo,
       issue_number: pullRequestNumber,
-      body: `${customComment} \n Jira link: ${
+      body: `${customComment} \n Auto link: ${
         jirProjectUrl + "/" + ticketNumber
       }`,
     });
