@@ -14,4 +14,4 @@ jobs:
           jira-project-url: https://jira.atlassian.net/browse
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           custom-comment: "Thank you for your contribution!!! :confetti_ball:"
-          ticket-regex-title: "^[A-Z,a-z]{2,}-\\d{1,}""
+          ticket-regex-title: "^[A-Z,a-z]{2,}-\\d{1,}"
