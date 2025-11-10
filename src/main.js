@@ -33,7 +33,11 @@ async function runMain() {
       context.payload.pull_request.title,
       ticketRegex
     );
+    console.log("PR Title:", context.payload.pull_request.title);
+    console.log("Regex:", ticketRegex);
+    console.log("Ticket Number:", ticketNumber);
     if (!ticketNumber) {
+      console.log("No ticket number found, returning early");
       return;
     }
     await octokit.rest.issues.createComment({
