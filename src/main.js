@@ -9,7 +9,7 @@ async function runMain() {
     const customComment = core.getInput("custom-comment");
     const ticketRegexRaw = core.getInput("ticket-regex-title");
     const ticketRegex = ticketRegexRaw
-      ? new RegExp(ticketRegexRaw, "g")
+      ? new RegExp(ticketRegexRaw.replace(/\\/g, "\\\\"), "g")
       : DEFAULT_TICKET_REGEX;
 
     const context = github.context;
