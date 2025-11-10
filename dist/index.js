@@ -9502,10 +9502,16 @@ const DEFAULT_TICKET_REGEX = /^[A-Z,a-z]{2,}-\d{1,}(?=:)/g;
  * @param {string} title
  */
 function grabTicket(title, ticketRegex) {
-  const ticketId = title.match(ticketRegex)?.[0];
-  if (!ticketId) {
+  const matches = title.match(ticketRegex);
+  if (!matches || matches.length === 0) {
     return null;
   }
+
+  // Get the longest match to ensure we match the complete ticket number
+  // This prevents partial matches like ABC-12 from ABC-128
+  const ticketId = matches.reduce((longest, current) => {
+    return current.length > longest.length ? current : longest;
+  }, matches[0]);
 
   return ticketId;
 }
